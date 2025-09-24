@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statek v Zahrádce | Ubytování & Eventy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5dc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('foto/statek.jpg?v=2');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .header-content h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .header-content .subtitle {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        /* Navigation */
+        .nav {
+            background: #2c3e28;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: #a0864a;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section:nth-child(even) {
+            background: transparent;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2c3e28;
+            margin-bottom: 3rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+        }
+
+        .about-text h3 {
+            color: #a0864a;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-box {
+            background: #f5f5f5;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 5px solid #a0864a;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: rgba(255,255,255,0.3);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #a0864a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Services */
+        .services-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+        }
+
+        .service-item.reverse {
+            direction: rtl;
+        }
+
+        .service-item.reverse > * {
+            direction: ltr;
+        }
+
+        .service-text {
+            padding: 1rem;
+        }
+
+        .service-text h3 {
+            color: #2c3e28;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .service-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .service-item.reverse {
+                direction: ltr;
+            }
+        }
+
+        /* Interactive Gallery */
+        .gallery-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .main-image-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(0,0,0,0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-arrow.prev {
+            left: 20px;
+        }
+
+        .nav-arrow.next {
+            right: 20px;
+        }
+
+        .thumbnails-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #a0864a transparent;
+        }
+
+        .thumbnails-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .thumbnails-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .thumbnails-container::-webkit-scrollbar-thumb {
+            background: #a0864a;
+            border-radius: 3px;
+        }
+
+        .thumbnail {
+            flex-shrink: 0;
+            width: 100px;
+            height: 70px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .thumbnail.active {
+            border-color: #a0864a;
+            transform: scale(1.05);
+        }
+
+        .gallery-counter {
+            text-align: center;
+            margin-top: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-image-container {
+                height: 300px;
+            }
+
+            .nav-arrow {
+                font-size: 1.5rem;
+                padding: 0.7rem;
+            }
+
+            .nav-arrow.prev {
+                left: 10px;
+            }
+
+            .nav-arrow.next {
+                right: 10px;
+            }
+
+            .thumbnail {
+                width: 80px;
+                height: 56px;
+            }
+        }
+
+        /* Contact */
+        .contact-info {
+            text-align: center;
+            background: #2c3e28;
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            color: #a0864a;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-content .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Statek v Zahrádce</h1>
+            <p class="subtitle">ubytování & eventy</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <ul class="nav-links">
+            <li><a href="#o-statku">O statku</a></li>
+            <li><a href="#vybaveni">Vybavení</a></li>
+            <li><a href="#sluzby">Služby</a></li>
+            <li><a href="#galerie">Galerie</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Section -->
+    <section id="o-statku" class="section">
+        <div class="container">
+            <h2>O STATKU</h2>
+            <div class="about-content">
+                <div class="feature-box">
+                    <p>Vítejte na statku v obci Zahrádka ležící pouhé 3 kilometry od vodní nádrže Orlík.</p>
+                    <p>Hledáte místo s duší, kde se potkává tradice s pohodou venkova? Náš statek nabízí ideální kulisu pro nezapomenutelné chvíle s rodinou či přáteli, ať už přijedete oslavit svatbu, narozeniny nebo jen hledáte místo k odpočinku na dovolené.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🏰 Naprosté soukromí</h3>
+                    <p>Náš statek je uzavřený areál, který si můžete pronajmout celý jen pro sebe. Obehnaný dvoumetrovou zdí poskytuje naprosté soukromí a klid pro nerušené chvíle. Jednoduše od nás dostanete klíče a zbytek je už jen na vás – prostor můžete využít přesně podle svých představ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="vybaveni" class="section">
+        <div class="container">
+            <h2>VYBAVENÍ</h2>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">🛏️</div>
+                    <h3>Ubytování</h3>
+                    <p>Na statku se pohodlně ubytuje 14 osob. Nabízíme 6 pokojů z nichž 5 je dvoulůžkových a jeden čtyřlůžkový.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">📶</div>
+                    <h3>WiFi</h3>
+                    <p>V objektu je k dispozici WiFi zdarma a set top box pro TV vysílání.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🏛️</div>
+                    <h3>Stodola</h3>
+                    <p>Stodola má kapacitu až 50 osob na sezení. Je vybavená barem a veškerým nádobím pro hostinu.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🏊</div>
+                    <h3>Bazén</h3>
+                    <p>Bazén měří 4 x 8m a je vybaven protiproudem. Samozřejmostí jsou lehátka a přilehlý altán.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Soukromá zahrada</h3>
+                    <p>Klidná uzavřená zahrada propojující všechny objekty statku měří 1 600 m².</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🧖</div>
+                    <h3>Sauna</h3>
+                    <p>Hlavní budova disponuje saunou až pro 6 osob.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="sluzby" class="section">
+        <div class="container">
+            <h2>NABÍZÍME</h2>
+            <div class="services-container">
+                <!-- Svatby - text vlevo, foto vpravo -->
+                <div class="service-item fade-in">
+                    <div class="service-text">
+                        <h3>Svatby</h3>
+                        <p>Prožijte svůj svatební den v naprostém soukromí na statku nedaleko Orlické přehrady. K pronájmu na svatbu nabízíme celý areál statku. Na jednom místě můžete uspořádat svatební obřad a svatební hostinu až pro 50 hostů i ubytovat své nejbližší. Prostor můžete využít přesně podle svých představ, předem Vám klíče a do detailu si na Vás. Pokud byste chtěli, věd Vám dopomůžeme oslavenému dodáním jako je catering, úklid apod.</p>
+                    </div>
+                    <div class="service-image">
+                        <img src="foto/svadby.jpg" alt="Svatební hostina">
+                    </div>
+                </div>
+
+                <!-- Eventy - foto vlevo, text vpravo -->
+                <div class="service-item reverse fade-in">
+                    <div class="service-text">
+                        <h3>Eventy</h3>
+                        <p>Ať už plánujete jakoukoliv událost, dveře statku jsou Vám otevřené. Můžete zde uspořádat oslavu narozenin či rodinné setkání v naprostém soukromí. Prostor je vhodný také pro firemní akce, teambuilding nebo tematické workshopy.</p>
+                    </div>
+                    <div class="service-image">
+                        <img src="foto/eventy.jpg" alt="Eventy a oslavy">
+                    </div>
+                </div>
+
+                <!-- Ubytování - text vlevo, foto vpravo -->
+                <div class="service-item fade-in">
+                    <div class="service-text">
+                        <h3>Ubytování</h3>
+                        <p>Chalupa nabízí ubytování v šesti pokojích, celkem pro 14 osob. Disponuje dvěma koupelnami a dvěma oddělenými toaletami. Má kompletně vybavenou kuchyň, společenský prostor. V zahradě se nachází venkovní posezení a pískoviště pro děti.</p>
+                    </div>
+                    <div class="service-image">
+                        <img src="foto/ubytovani-.jpeg" alt="Ubytování">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galerie" class="section">
+        <div class="container">
+            <h2>JAK TO U NÁS VYPADÁ</h2>
+            <div class="gallery-container">
+                <!-- Main Image Display -->
+                <div class="main-image-container">
+                    <img id="main-image" class="main-image" src="foto/statek.jpg" alt="Statek v Zahrádce">
+                    <button class="nav-arrow prev" id="prev-btn">‹</button>
+                    <button class="nav-arrow next" id="next-btn">›</button>
+                </div>
+
+                <!-- Thumbnails Row -->
+                <div class="thumbnails-container" id="thumbnails-container">
+                    <!-- Thumbnails will be dynamically generated by JavaScript -->
+                </div>
+
+                <!-- Gallery Counter -->
+                <div class="gallery-counter">
+                    <span id="current-image">1</span> / <span id="total-images">16</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontakt" class="section">
+        <div class="container">
+            <h2>KONTAKT</h2>
+            <div class="contact-info">
+                <h3>Rezervace a informace</h3>
+                <p>Online rezervace a kalendář obsazenosti na <a href="https://www.e-chalupy.cz/chalupa-pronajmuti-kostelec-nad-vltavou-ubytovani-o7568">echalupy.cz</a></p>
+                <p>Pro rezervaci termínu nebo další informace nás neváhejte kontaktovat.</p>
+                <p><strong>📍 Zahrádka, 3 km od Orlické přehrady</strong></p>
+                <p><strong>📧 Email:</strong> libor.hynek@gmail.com</p>
+                <p><strong>📞 Telefon:</strong> +420 777 557 773</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Statek v Zahrádce. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu handling
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Interactive Gallery
+        const galleryImages = [
+            { src: 'foto/statek.jpg', alt: 'Hlavní budova statku' },
+            { src: 'foto/eventy.jpg', alt: 'Prostory pro eventy' },
+            { src: 'foto/svadby.jpg', alt: 'Svatební hostina' },
+            { src: 'foto/ubytovani-.jpeg', alt: 'Ubytovací pokoje' },
+            { src: 'foto/DSC00214 (kopie).jpg', alt: 'Exteriér statku' },
+            { src: 'foto/zahrada-s-posezenim-1db6-.jpeg', alt: 'Zahrada s posezením' },
+            { src: 'foto/spolecenska-mistnost-ee14-.jpeg', alt: 'Společenská místnost' },
+            { src: 'foto/spolecenska-mistnost-f5c6-.jpeg', alt: 'Společenský prostor' },
+            { src: 'foto/moznost-priobjednat-prostor-pro-oslavy-pro-cca-50-lidi-aad1-.jpeg', alt: 'Prostor pro oslavy' },
+            { src: 'foto/img-0827-ebdf-.jpeg', alt: 'Interiér statku' },
+            { src: 'foto/img-1023-45bf-.jpeg', alt: 'Detaily interiéru' },
+            { src: 'foto/chodba-podkrovi-a45f-.jpeg', alt: 'Chodba podkroví' },
+            { src: 'foto/16ceb6_0495fd77f9d94cf78e9989cac57eb0b8~mv2.png', alt: 'Venkovní prostory' },
+            { src: 'foto/16ceb6_232a07870e1748b88bb0a29e019abcd6~mv2.png', alt: 'Areál statku' },
+            { src: 'foto/16ceb6_7e0f2331d2a74680b56a28e5b85efe93~mv2.png', alt: 'Okolí statku' },
+            { src: 'foto/16ceb6_9f633d4a509e4f988629f46f7644e876~mv2.jpg', alt: 'Další pohled na statek' }
+        ];
+
+        let currentImageIndex = 0;
+
+        // Initialize gallery
+        function initGallery() {
+            const thumbnailsContainer = document.getElementById('thumbnails-container');
+            const totalImagesSpan = document.getElementById('total-images');
+
+            // Update total images count
+            totalImagesSpan.textContent = galleryImages.length;
+
+            // Generate thumbnails
+            galleryImages.forEach((image, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'thumbnail';
+                if (index === 0) thumbnail.classList.add('active');
+
+                const img = document.createElement('img');
+                img.src = image.src;
+                img.alt = image.alt;
+                img.loading = 'lazy';
+
+                thumbnail.appendChild(img);
+                thumbnail.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Store current scroll position
+                    const currentScrollY = window.scrollY;
+
+                    showImage(index);
+
+                    // Restore scroll position immediately
+                    window.scrollTo(0, currentScrollY);
+
+                    return false;
+                });
+                thumbnailsContainer.appendChild(thumbnail);
+            });
+        }
+
+        // Show image at specific index
+        function showImage(index) {
+            if (index < 0) index = galleryImages.length - 1;
+            if (index >= galleryImages.length) index = 0;
+
+            currentImageIndex = index;
+
+            const mainImage = document.getElementById('main-image');
+            const currentImageSpan = document.getElementById('current-image');
+
+            // Update main image
+            mainImage.src = galleryImages[index].src;
+            mainImage.alt = galleryImages[index].alt;
+
+            // Update counter
+            currentImageSpan.textContent = index + 1;
+
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+
+            // Scroll active thumbnail into view (only horizontally within thumbnails container)
+            const activeThumbnail = document.querySelectorAll('.thumbnail')[index];
+            const thumbnailsContainer = activeThumbnail.parentElement;
+
+            // Calculate position for horizontal scroll only
+            const containerRect = thumbnailsContainer.getBoundingClientRect();
+            const thumbnailRect = activeThumbnail.getBoundingClientRect();
+
+            if (thumbnailRect.left < containerRect.left || thumbnailRect.right > containerRect.right) {
+                const scrollLeft = activeThumbnail.offsetLeft - (thumbnailsContainer.offsetWidth / 2) + (activeThumbnail.offsetWidth / 2);
+                thumbnailsContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+            }
+        }
+
+        // Navigation functions
+        function nextImage() {
+            showImage(currentImageIndex + 1);
+        }
+
+        function prevImage() {
+            showImage(currentImageIndex - 1);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            initGallery();
+
+            // Navigation buttons
+            document.getElementById('next-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Store current scroll position
+                const currentScrollY = window.scrollY;
+
+                nextImage();
+
+                // Restore scroll position immediately
+                window.scrollTo(0, currentScrollY);
+
+                return false;
+            });
+            document.getElementById('prev-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Store current scroll position
+                const currentScrollY = window.scrollY;
+
+                prevImage();
+
+                // Restore scroll position immediately
+                window.scrollTo(0, currentScrollY);
+
+                return false;
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'Escape') {
+                    // Could be used for closing lightbox in future
+                }
+            });
+
+            // Touch/swipe support for mobile
+            let startX = null;
+            const mainImageContainer = document.querySelector('.main-image-container');
+
+            mainImageContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            mainImageContainer.addEventListener('touchend', (e) => {
+                if (startX === null) return;
+
+                const endX = e.changedTouches[0].clientX;
+                const deltaX = startX - endX;
+
+                if (Math.abs(deltaX) > 50) { // Minimum swipe distance
+                    if (deltaX > 0) {
+                        nextImage();
+                    } else {
+                        prevImage();
+                    }
+                }
+
+                startX = null;
+            });
+        });
+    </script>
+</body>
+</html>

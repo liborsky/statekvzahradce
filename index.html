@@ -149,16 +149,23 @@
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: #a0864a;
-            border-radius: 50%;
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
-            color: white;
-            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1);
         }
 
         /* Services */
@@ -475,32 +482,44 @@
             <h2>VYBAVENÍ</h2>
             <div class="features-grid">
                 <div class="feature-box">
-                    <div class="feature-icon">🛏️</div>
+                    <div class="feature-icon">
+                        <img src="foto/ubytovani.svg" alt="Ubytování ikona">
+                    </div>
                     <h3>Ubytování</h3>
                     <p>Na statku se pohodlně ubytuje 14 osob. Nabízíme 6 pokojů z nichž 5 je dvoulůžkových a jeden čtyřlůžkový.</p>
                 </div>
                 <div class="feature-box">
-                    <div class="feature-icon">📶</div>
+                    <div class="feature-icon">
+                        <img src="foto/wifi.svg" alt="WiFi ikona">
+                    </div>
                     <h3>WiFi</h3>
                     <p>V objektu je k dispozici WiFi zdarma a set top box pro TV vysílání.</p>
                 </div>
                 <div class="feature-box">
-                    <div class="feature-icon">🏛️</div>
+                    <div class="feature-icon">
+                        <img src="foto/stodola.svg" alt="Stodola ikona">
+                    </div>
                     <h3>Stodola</h3>
                     <p>Stodola má kapacitu až 50 osob na sezení. Je vybavená barem a veškerým nádobím pro hostinu.</p>
                 </div>
                 <div class="feature-box">
-                    <div class="feature-icon">🏊</div>
+                    <div class="feature-icon">
+                        <img src="foto/bazen.svg" alt="Bazén ikona">
+                    </div>
                     <h3>Bazén</h3>
                     <p>Bazén měří 4 x 8m a je vybaven protiproudem. Samozřejmostí jsou lehátka a přilehlý altán.</p>
                 </div>
                 <div class="feature-box">
-                    <div class="feature-icon">🌿</div>
+                    <div class="feature-icon">
+                        <img src="foto/zahrada.svg" alt="Zahrada ikona">
+                    </div>
                     <h3>Soukromá zahrada</h3>
                     <p>Klidná uzavřená zahrada propojující všechny objekty statku měří 1 600 m².</p>
                 </div>
                 <div class="feature-box">
-                    <div class="feature-icon">🧖</div>
+                    <div class="feature-icon">
+                        <img src="foto/sauna.svg" alt="Sauna ikona">
+                    </div>
                     <h3>Sauna</h3>
                     <p>Hlavní budova disponuje saunou až pro 6 osob.</p>
                 </div>

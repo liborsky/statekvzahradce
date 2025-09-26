@@ -65,19 +65,62 @@
             z-index: 1000;
         }
 
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Hamburger menu button */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Hamburger animation when active */
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
         .nav-links {
             display: flex;
             justify-content: center;
             list-style: none;
             gap: 2rem;
+            margin: 0;
+            padding: 0;
+            flex: 1;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.2rem;
             border-radius: 5px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
             font-weight: 600;
             font-size: 1.1rem;
@@ -85,6 +128,7 @@
 
         .nav-links a:hover {
             background: #a0864a;
+            transform: translateY(-2px);
         }
 
         /* Sections */
@@ -397,27 +441,123 @@
             padding: 2rem 0;
         }
 
-        /* Responsive */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
+            /* Show hamburger menu on mobile */
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav .container {
+                justify-content: flex-end;
+            }
+
+            /* Hide desktop menu and show mobile menu */
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: #000;
+                flex-direction: column;
+                padding: 2rem 0;
+                gap: 0;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links li {
+                text-align: center;
+                border-bottom: 1px solid rgba(160, 134, 74, 0.2);
+            }
+
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+                border-radius: 0;
+                transition: all 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                background: #a0864a;
+                transform: none;
+                padding-left: 2.5rem;
+            }
+
+            /* Other mobile optimizations */
             .header-content h1 {
                 font-size: 2.5rem;
+                margin-bottom: 1rem;
             }
-            
+
             .header-content .subtitle {
                 font-size: 1.2rem;
+                margin-bottom: 2rem;
             }
-            
+
             .about-content {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
-            
-            .nav-links {
-                flex-wrap: wrap;
-                gap: 1rem;
+
+            .section {
+                padding: 3rem 0;
             }
-            
+
             .section h2 {
                 font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-item {
+                padding: 1.5rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Extra small devices (phones, less than 576px) */
+        @media (max-width: 576px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+
+            .header-content .subtitle {
+                font-size: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-item {
+                padding: 1.2rem;
             }
         }
 
@@ -450,13 +590,22 @@
 
     <!-- Navigation -->
     <nav class="nav">
-        <ul class="nav-links">
-            <li><a href="#o-statku">O statku</a></li>
-            <li><a href="#vybaveni">Vybavení</a></li>
-            <li><a href="#sluzby">Služby</a></li>
-            <li><a href="#galerie">Galerie</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-        </ul>
+        <div class="container">
+            <!-- Hamburger menu button -->
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Otevřít menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#o-statku">O statku</a></li>
+                <li><a href="#vybaveni">Vybavení</a></li>
+                <li><a href="#sluzby">Služby</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </div>
     </nav>
 
     <!-- About Section -->
@@ -636,9 +785,33 @@
         });
 
         // Mobile menu handling
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        // Toggle mobile menu
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+
+            // Update aria label for accessibility
+            if (navLinks.classList.contains('active')) {
+                this.setAttribute('aria-label', 'Zavřít menu');
+            } else {
+                this.setAttribute('aria-label', 'Otevřít menu');
+            }
+        });
+
+        // Close mobile menu when clicking on menu links
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
+
+                // Close mobile menu
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-label', 'Otevřít menu');
+
+                // Smooth scroll to target
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
@@ -648,6 +821,24 @@
                     });
                 }
             });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav') && navLinks.classList.contains('active')) {
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-label', 'Otevřít menu');
+            }
+        });
+
+        // Close mobile menu on window resize (if user rotates device)
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-label', 'Otevřít menu');
+            }
         });
 
         // Interactive Gallery

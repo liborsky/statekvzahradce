@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statek v Zahrádce | Ubytování & Eventy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,7 +15,7 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Cormorant', serif;
             line-height: 1.6;
             color: #333;
             background-color: #FDF6ED;
@@ -136,27 +139,30 @@
             padding: 4rem 0;
         }
 
+        #kontakt {
+            padding: 0;
+        }
+
         .section:nth-child(even) {
             background: transparent;
         }
 
         .section h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: #2c3e28;
             margin-bottom: 3rem;
         }
 
         /* About Section */
         .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         .about-text {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
         }
 
         .about-text h3 {
@@ -169,6 +175,15 @@
             background: #FDF6ED;
             padding: 2rem;
             border-radius: 10px;
+            text-align: center;
+        }
+
+        .feature-box p {
+            font-size: 1.25rem;
+        }
+
+        .feature-box h3 {
+            text-align: center;
         }
 
         /* Features Grid */
@@ -193,8 +208,8 @@
         }
 
         .feature-icon {
-            width: 80px;
-            height: 80px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -243,10 +258,11 @@
             color: #2c3e28;
             font-size: 1.8rem;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .service-text p {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             line-height: 1.7;
         }
 
@@ -411,15 +427,14 @@
         /* Contact */
         .contact-info {
             text-align: center;
-            background: #2c3e28;
-            color: white;
-            padding: 3rem;
-            border-radius: 15px;
-            margin-top: 2rem;
+            background: #94A485;
+            font-size: 1.5rem;
+            color: rgb(26, 24, 24);
+            padding: 3rem 0;
         }
 
         .contact-info h3 {
-            color: #a0864a;
+            color: rgb(26, 24, 24);
             margin-bottom: 1rem;
         }
 
@@ -427,10 +442,29 @@
             color: white;
             font-weight: bold;
             text-decoration: none;
+            background: black;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
 
         .contact-info a:hover {
-            text-decoration: underline;
+            background: white;
+            color: black;
+        }
+
+        /* Google Maps */
+        .map-section {
+            width: 100%;
+            height: 400px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .map-section iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
         /* Footer */
@@ -561,6 +595,83 @@
             }
         }
 
+        /* Parallax Section */
+        .parallax-section {
+            padding: 4rem 0;
+        }
+
+        .parallax-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('foto/eventy.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            z-index: 1;
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 4rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .parallax-content h3 {
+            font-size: 2rem;
+            color: #2c3e28;
+            margin-bottom: 1.5rem;
+        }
+
+        .parallax-content p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .parallax-container {
+                height: 500px;
+            }
+
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+
+            .parallax-content {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+
+            .parallax-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .parallax-content p {
+                font-size: 1rem;
+            }
+        }
+
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
@@ -583,7 +694,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1>Statek v Zahrádce</h1>
+            <h1>Statek <br>v Zahrádce</h1>
             <p class="subtitle">ubytování & eventy</p>
         </div>
     </header>
@@ -599,11 +710,12 @@
             </button>
 
             <ul class="nav-links" id="nav-links">
-                <li><a href="#o-statku">O statku</a></li>
-                <li><a href="#vybaveni">Vybavení</a></li>
-                <li><a href="#sluzby">Služby</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
+                <li><a href="#o-statku">O STATKU</a></li>
+                <li><a href="#vybaveni">VYBAVENÍ</a></li>
+               
+                <li><a href="#sluzby">NABÍZÍME</a></li>
+                <li><a href="#galerie">GALERIE</a></li>
+                <li><a href="#kontakt">KONTAKT</a></li>
             </ul>
         </div>
     </nav>
@@ -617,10 +729,17 @@
                     <p>Vítejte na statku v obci Zahrádka ležící pouhé 3 kilometry od vodní nádrže Orlík.</p>
                     <p>Hledáte místo s duší, kde se potkává tradice s pohodou venkova? Náš statek nabízí ideální kulisu pro nezapomenutelné chvíle s rodinou či přáteli, ať už přijedete oslavit svatbu, narozeniny nebo jen hledáte místo k odpočinku na dovolené.</p>
                 </div>
-                <div class="feature-box">
-                    <h3>🏰 Naprosté soukromí</h3>
-                    <p>Náš statek je uzavřený areál, který si můžete pronajmout celý jen pro sebe. Obehnaný dvoumetrovou zdí poskytuje naprosté soukromí a klid pro nerušené chvíle. Jednoduše od nás dostanete klíče a zbytek je už jen na vás – prostor můžete využít přesně podle svých představ.</p>
-                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Section -->
+    <section class="parallax-section">
+        <div class="parallax-container">
+            <div class="parallax-bg"></div>
+            <div class="parallax-content">
+                <h3>Naprosté soukromí</h3>
+                <p>Náš statek je uzavřený areál, který si můžete pronajmout celý jen pro sebe. Obehnaný dvoumetrovou zdí poskytuje naprosté soukromí a klid pro nerušené chvíle. Jednoduše od nás dostanete klíče a zbytek je už jen na vás – prostor můžete využít přesně podle svých představ.</p>
             </div>
         </div>
     </section>
@@ -742,27 +861,40 @@
         </div>
     </section>
 
-
     
     <!-- Contact Section -->
     <section id="kontakt" class="section">
-        <div class="container">
-            <h2>KONTAKT</h2>
             <div class="contact-info">
-                <h3>Rezervace a informace</h3>
-                <p>online rezervace a kalendář obsazenosti na <a href="https://www.e-chalupy.cz/chalupa-pronajmuti-kostelec-nad-vltavou-ubytovani-o7568" target="_blank" rel="noopener noreferrer">echalupy.cz</a></p>
-                <p>Pro rezervaci termínu nebo další informace nás neváhejte kontaktovat.</p>
-                <p><strong>📍 Zahrádka, 3 km od Orlické přehrady</strong></p>
-                <p><strong>📧 Email:</strong> libor.hynek@gmail.com</p>
-                <p><strong>📞 Telefon:</strong> +420 777 557 773</p>
+                <h3><strong>KONTAKT</strong></h3>
+                <i>
+               
+                <p>libor.hynek@gmail.com      /          Zahrádka 13, Kostelec nad Vltavou, 398 58        /       +420 777 557 773</i>
+                <p>. </p>
+              
+                 <h3><strong>REZERVACE</strong></h3>
+                  <p><i>online rezervace a kalendář obsazenosti na</i> </p>
+                  <p>
+                    <a href="https://www.e-chalupy.cz/chalupa-pronajmuti-kostelec-nad-vltavou-ubytovani-o7568" target="_blank" rel="noopener noreferrer">e-chalupy.cz</a></p>
             </div>
-        </div>
+    </section>
+
+    <!-- Google Maps Section -->
+    <section class="map-section">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2579.8547686837844!2d14.274166776893943!3d49.67722024204886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b0c9e6b7e7f7f%3A0x3e0e0e0e0e0e0e0e!2sZahr%C3%A1dka%2013%2C%20398%2058%20Kostelec%20nad%20Vltavou!5e0!3m2!1scs!2scz!4v1234567890123!5m2!1scs!2scz&output=embed"
+                width="100%"
+                height="400"
+                style="border:0; pointer-events: auto;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Google Maps - Statek v Zahrádce">
+        </iframe>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Statek v Zahrádce. Všechna práva vyhrazena.</p>
+            <p>&copy; 2025 Dominika Hiřmanová </p>
         </div>
     </footer>
 
@@ -846,7 +978,7 @@
         const galleryImages = [
             { src: 'foto/statek.jpg', alt: 'Hlavní budova statku' },
             { src: 'foto/eventy.jpg', alt: 'Prostory pro eventy' },
-            { src: 'foto/svatby.jpg', alt: 'Svatební hostina' },
+            { src: 'foto/svatcommitby.jpg', alt: 'Svatební hostina' },
             { src: 'foto/ubytovani-.jpeg', alt: 'Ubytovací pokoje' },
             { src: 'foto/DSC00214 (kopie).jpg', alt: 'Exteriér statku' },
             { src: 'foto/zahrada-s-posezenim-1db6-.jpeg', alt: 'Zahrada s posezením' },
